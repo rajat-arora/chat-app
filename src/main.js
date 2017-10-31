@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 import Dashboard from './components/Dashboard.vue'
 import Signin from './components/Signin.vue'
 import Signup from './components/Signup.vue'
-//import store from './store'
+import store from './store'
 
 const router = new VueRouter({
     mode: 'history',
@@ -21,7 +21,7 @@ const router = new VueRouter({
 
 firebaseApp.auth().onAuthStateChanged(user => {
     if(user){
-        //store.dispatch('signIn', user)
+        store.dispatch('signIn', user)
         router.push('/dashboard')
     }else{
        router.replace('/signin')
@@ -31,6 +31,6 @@ firebaseApp.auth().onAuthStateChanged(user => {
 new Vue({
     el: '#app',
     router,
-    //store,
+    store,
     render: h=> h(App)
 })

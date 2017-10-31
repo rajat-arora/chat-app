@@ -42,7 +42,7 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
-    public: 'vu-js-learning-octate.c9users.io' // That solved it
+    public: 'node-js-with-hayden-octate.c9users.io' // That solved it
   },
   performance: {
     hints: false
