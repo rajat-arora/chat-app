@@ -8,6 +8,8 @@ import Dashboard from './components/Dashboard.vue'
 import Signin from './components/Signin.vue'
 import Signup from './components/Signup.vue'
 import store from './store'
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
 
 const router = new VueRouter({
     mode: 'history',

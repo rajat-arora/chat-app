@@ -16,40 +16,15 @@
             </div>
             <div class="title">Chat</div>
         </div>
-        <ul class="messages">
-            <li class="message left appeared">
-                <div class="avatar"></div>
-                
-            </li>
-
+        <ul id="me" class="messages" v-chat-scroll>
+           <AddMessageCard
+            v-for="(event_item,index) in this.$store.state.events"
+            :event="event_item"
+            :index = "event_item.key"
+            key="index"/>
         </ul>
-        <div class="bottom_wrapper clearfix">
-            <div class="message_input_wrapper">
-                <input class="message_input" placeholder="Type your message here..." />
-            </div>
-            <div class="send_message">
-                <div class="icon">
-
-                </div>
-                <div class="text">Send</div>
-            </div>
-        </div>
+       <AddMessage/>
     </div>
-    <div class="message_template">
-        <li class="message">
-            <div class="avatar">
-
-            </div>
-            <div class="text_wrapper">
-                <div class="text">
-
-                </div>
-            </div>
-        </li>
-    </div>
-
-
-    <button class="btn btn-danger btn-small signout-btn" @click="signOut">Sign Out</button>
     
     </div>
 </template>
@@ -57,12 +32,38 @@
 
 <script>
     import { firebaseApp, eventsRef } from '../firebaseApp'
+    import AddMessage from './AddMessage.vue'
+    import AddMessageCard from './AddMessageCard.vue'
+    var mergeJSON = require("merge-json");
+
+
     export default {
         methods: {
             signOut() {
                 this.$store.dispatch('signOut')
                 firebaseApp.auth().signOut()
             }
-        }
+        },
+         components:{
+            AddMessage,
+            AddMessageCard
+        },
+        
+       mounted(){
+        eventsRef.on('value', snap =>{
+            let events =[]
+            snap.forEach(event=>{
+                var key = {key:event.key}
+                var result = mergeJSON.merge(key, event.val());
+                //console.log(result)
+                events.push(result)
+            })
+            this.$store.dispatch('setEvents', events )
+
+        })
+        
+
+
+    }
     }
 </script>

@@ -267,10 +267,11 @@ body {
   border: none;
   height: 100%;
   box-sizing: border-box;
-  width: calc(100% - 40px);
-  position: absolute;
+  width: 40%;
+  position: relative;
   outline-width: 0;
   color: gray;
+  text-align: left
 }
 .bottom_wrapper .send_message {
   width: 140px;
@@ -299,8 +300,6 @@ body {
 .message_template {
   display: none;
 }
-
-
 
 
 
